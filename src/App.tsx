@@ -6,6 +6,11 @@ function App() {
   const [state, dispatch] = useReducer(taskReducer, initialState);
 
   function handleAddTask() {
+    const hasTask = task.trim();
+    if (!hasTask) {
+      alert("Digite uma tarefa para ser adicionada!");
+      return;
+    }
     dispatch({ type: "ADD_TASK", text: task });
     setTask("");
   }
