@@ -28,6 +28,24 @@ export function taskReducer(state: State, payload: Actions) {
           { id: Date.now(), text: payload.text, completed: false },
         ],
       };
+
+    case "TOGGLE_TASK":
+      return {
+        ...state,
+        tasks: [
+          ...state.tasks.map((task) =>
+            task.id === payload.id
+              ? { ...task, completed: !task.completed }
+              : task,
+          ),
+        ],
+      };
+
+    case "REMOVE_TASK":
+      return {
+        ...state,
+        tasks: [...state.tasks.filter((task) => task.id !== payload.id)],
+      };
     default:
       return state;
   }
